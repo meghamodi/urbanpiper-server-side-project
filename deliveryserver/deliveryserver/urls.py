@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
+
+from delivery.views import TaskView, LoginView, LogoutView, UpdateTaskState
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^api/(?P<version>[v1]+)/delivery_task/', TaskView.as_view()),
+    url(r'^api/(?P<version>[v1]+)/update_task/', UpdateTaskState.as_view()),
+
+    url(r'^api/(?P<version>[v1]+)/login/', LoginView.as_view()),
+    url(r'^api/(?P<version>[v1]+)/logout/', LogoutView.as_view()),
 ]
